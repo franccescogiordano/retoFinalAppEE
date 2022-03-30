@@ -2,7 +2,7 @@ package co.com.sofka.ServerSide.model;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 import java.util.UUID;
-@Document(collection = "productos")
+@Document(collection = "inventario")
 public class ProductoModel {
     @Id
     private String id = UUID.randomUUID().toString().substring(0, 10);
@@ -65,13 +65,7 @@ public class ProductoModel {
         this.tipo = tipo;
     }
 
-    public String getStock() {
-        return this.stock;
-    }
 
-    public void setStock(String stock) {
-        this.stock = stock;
-    }
 
     public String getStockMinimo() {
         return this.stockMinimo;
