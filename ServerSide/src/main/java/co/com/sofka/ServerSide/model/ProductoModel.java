@@ -15,9 +15,9 @@ public class ProductoModel {
     private Float precio;
 
 
-    public ProductoModel(String tipo, String stock, String stockMinimo, String descripcion, String nombre,String stockMaximo, Float precio) {
+    public ProductoModel(String tipo, String stockActual, String stockMinimo, String descripcion, String nombre,String stockMaximo, Float precio) {
         this.tipo = tipo;
-        this.stockActual = stock;
+        this.stockActual = stockActual;
         this.stockMinimo = stockMinimo;
         this.descripcion = descripcion;
         this.nombre = nombre;
@@ -91,5 +91,19 @@ public class ProductoModel {
         this.nombre = nombre;
     }
 
+    public void disminuirStock(String restar){
+        int actual=Integer.parseInt(this.stockActual);
+        int restarint=Integer.parseInt(restar);
+        int stockfinal=actual-restarint;
 
+        this.stockActual=String.valueOf(stockfinal);
+    }
+
+    public void aumentarStock(String sumar){
+        int actual=Integer.parseInt(this.stockActual);
+        int sumarint=Integer.parseInt(sumar);
+        int stockfinal=actual+sumarint;
+
+        this.stockActual=String.valueOf(stockfinal);
+    }
 }
