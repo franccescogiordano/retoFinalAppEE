@@ -1,7 +1,4 @@
 package co.com.sofka.ServerSide.controllers;
-import co.com.sofka.ServerSide.service.FacturaService;
-import co.com.sofka.ServerSide.model.FacturaModel;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,26 +7,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-
+import co.com.sofka.ServerSide.service.VolanteService;
+import co.com.sofka.ServerSide.model.VolanteModel;
 import reactor.core.publisher.Flux;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.HttpStatus;
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/factura")
-public class FacturaController {
+@RequestMapping("/volante")
+public class VolanteController {
     @Autowired
-    private FacturaService facturaService;
+    private VolanteService volanteService;
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<FacturaModel> save(@RequestBody FacturaModel cliente) {
-        return this.facturaService.save(cliente);
+    public Mono<VolanteModel> save(@RequestBody VolanteModel volante) {
+        return this.volanteService.save(volante);
     }
 
     @GetMapping(value = "")
-    public Flux<FacturaModel> findAll() {
-        return this.facturaService.findAll();
+    public Flux<VolanteModel> findAll() {
+        return this.volanteService.findAll();
     }
 }

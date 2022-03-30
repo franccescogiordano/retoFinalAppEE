@@ -7,7 +7,8 @@ import co.com.sofka.ServerSide.repository.VendedorRepository;
 import co.com.sofka.ServerSide.service.VendedorService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
+import org.springframework.stereotype.Service;
+@Service
 public class ImplVendedorService implements VendedorService{
 
     @Autowired

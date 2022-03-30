@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import java.util.List;
 import java.util.UUID;
 @Document(collection = "volantes")
-public class VoltanteModel {
+public class VolanteModel {
     @Id
     private String id = UUID.randomUUID().toString().substring(0, 10);
     private String fecha;
@@ -13,7 +13,7 @@ public class VoltanteModel {
     private String CIProveedor;
 
 
-    public VoltanteModel( String fecha, List<ProductoModel> productosAIngresar, String CIProveedor) {
+    public VolanteModel( String fecha, List<ProductoModel> productosAIngresar, String CIProveedor) {
         this.fecha = fecha;
         this.productosAIngresar = productosAIngresar;
         this.CIProveedor = CIProveedor;

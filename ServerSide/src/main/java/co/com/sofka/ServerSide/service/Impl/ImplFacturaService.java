@@ -7,7 +7,8 @@ import co.com.sofka.ServerSide.repository.FacturaRepository;
 import co.com.sofka.ServerSide.service.FacturaService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
+import org.springframework.stereotype.Service;
+@Service
 public class ImplFacturaService implements FacturaService{
   
     @Autowired

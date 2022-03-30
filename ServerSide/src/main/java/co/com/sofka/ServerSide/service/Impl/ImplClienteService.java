@@ -6,7 +6,8 @@ import co.com.sofka.ServerSide.repository.ClienteRepository;
 import co.com.sofka.ServerSide.service.ClienteService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
+import org.springframework.stereotype.Service;
+@Service
 public class ImplClienteService implements ClienteService{
     @Autowired
     private ClienteRepository cliente_repo;
