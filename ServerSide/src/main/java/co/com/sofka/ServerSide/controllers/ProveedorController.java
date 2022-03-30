@@ -1,7 +1,7 @@
 package co.com.sofka.ServerSide.controllers;
 
-import co.com.sofka.ServerSide.service.VendedorService;
-import co.com.sofka.ServerSide.model.VendedorModel;
+import co.com.sofka.ServerSide.service.ProveedorService;
+import co.com.sofka.ServerSide.model.ProveedorModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,20 +18,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/vendedor")
-public class VendedorController {
+@RequestMapping("/proveedor")
+public class ProveedorController {
     
     @Autowired
-    private VendedorService vendedorService;
+    private ProveedorService proveedorService;
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<VendedorModel> save(@RequestBody VendedorModel vendedor) {
-        return this.vendedorService.save(vendedor);
+    public Mono<ProveedorModel> save(@RequestBody ProveedorModel proveedor) {
+        return this.proveedorService.save(proveedor);
     }
-
     @GetMapping(value = "")
-    public Flux<VendedorModel> findAll() {
-        return this.vendedorService.findAll();
+    public Flux<ProveedorModel> findAll() {
+        return this.proveedorService.findAll();
     }
 }

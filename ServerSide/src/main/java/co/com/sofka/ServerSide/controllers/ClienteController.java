@@ -1,8 +1,4 @@
 package co.com.sofka.ServerSide.controllers;
-
-import co.com.sofka.ServerSide.service.VendedorService;
-import co.com.sofka.ServerSide.model.VendedorModel;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,27 +7,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-
+import co.com.sofka.ServerSide.service.ClienteService;
+import co.com.sofka.ServerSide.model.ClienteModel;
 import reactor.core.publisher.Flux;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.HttpStatus;
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/vendedor")
-public class VendedorController {
-    
+@RequestMapping("/cliente")
+public class ClienteController {
     @Autowired
-    private VendedorService vendedorService;
+    private ClienteService clienteService;
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<VendedorModel> save(@RequestBody VendedorModel vendedor) {
-        return this.vendedorService.save(vendedor);
+    public Mono<ClienteModel> save(@RequestBody ClienteModel cliente) {
+        return this.clienteService.save(cliente);
     }
 
     @GetMapping(value = "")
-    public Flux<VendedorModel> findAll() {
-        return this.vendedorService.findAll();
+    public Flux<ClienteModel> findAll() {
+        return this.clienteService.findAll();
     }
 }
