@@ -8,7 +8,7 @@ import {useFirebaseApp} from 'reactfire';
 export default  (props) => {
     const [ email,setEmail]= useState("");
     const [ password,setPassword]= useState("");
-    const [estado,setEstado]=useState("");
+    const [estado,setEstado]=useState("false");
     const firebase=useFirebaseApp();
     const submit = async () =>{
         const auth = getAuth();
@@ -26,15 +26,20 @@ export default  (props) => {
       });
       // createUserWithEmailAndPassword(auth,email,password);
         }
+        const logout=async() => {
+await firebase.auth().signOut();
+setEstado("false");
+        }
     return (<div>
        <h1>{estado}</h1>
-        <div>
+       {estado=="false" && <div>
             <label htmlFor="email">Correo electronico</label>
             <input type="email" id="email" onChange={(ev)=>setEmail(ev.target.value)} ></input>
             <label htmlFor="password"> Contraseña</label>
             <input type="password" id="password" onChange={(ev)=>setPassword(ev.target.value)} ></input>
             <button onClick={submit}>Iniciar sesion</button>
-        </div>
+        </div> }
+        {estado=="true" && <button onClick={logout}>Cerrar sesion</button> }
     </div>  );
 }
  
