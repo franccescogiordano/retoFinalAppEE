@@ -1,7 +1,7 @@
 
 import Logo from './assets/img/logo.png'
 import Auth from './components/Auth';
-
+import React, { Component }  from 'react';
 function App() {
   return (
     <div className="div-welcome">

@@ -5,19 +5,9 @@ function Login(){
     return (
       <>
         <div>
-          <img src="" alt="" />
+        <h2>has iniciado sesion con exito!</h2>
         </div>
-        <form action="">
-            <label htmlFor="">
-                Ingresa E-mail
-                <input type="text" />
-            </label>
-            <label htmlFor="">
-                Ingresa Contraseña
-                <input type="password" />
-            </label>
-            <input type="submit" value="Ingresar" />
-        </form>
+       
         
       </>
     );
