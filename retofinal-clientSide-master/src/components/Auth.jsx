@@ -44,14 +44,16 @@ export default () => {
   return (<div>
     {<h4>{estadoLogin}</h4>}
     {estadoRegistrado === "registrado con exito! ahora inicia sesion" && <h4>{estadoRegistrado}</h4>}
-    {!user && <div className="container">
+    {!user && <div className="container-login">
       <label htmlFor="email">Correo electronico</label>
       <input type="email" id="email" onChange={(ev) => setEmail(ev.target.value)} ></input>
       <label htmlFor="password"> Contraseña</label>
       <input type="password" id="password" onChange={(ev) => setPassword(ev.target.value)} ></input>
+      <div className="botones-login">
       <button onClick={submit}>Iniciar sesion</button>
-      {estadoRegistrado === "unregister" && <button onClick={registrar}>Registrarme</button>}
+      {estadoRegistrado === "unregister" && <button onClick={registrar}>Registrarme</button>}</div>
     </div>}
+    
     {user && <><Inventory user={user}></Inventory><button onClick={logout}>Cerrar sesion</button></>}
   </div>);
 }
