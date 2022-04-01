@@ -6,7 +6,7 @@ const actGetProductos = ()=>async(dispatch)=>{
     try {
         console.log("TOY EN EL ACTION")
         
-        fetch('http://localhost:8080/factura')
+        fetch('http://localhost:8080/inventario')
             .then(response => response.json())
             .then(data => dispatch({
                 type: "getProductos", //a esto llama
@@ -16,6 +16,7 @@ const actGetProductos = ()=>async(dispatch)=>{
         console.log(e)
     }
 }
+
 const actlogear = (auth,email,password)=>async(dispatch)=>{
     
     try{
@@ -61,12 +62,19 @@ const actdeslogear = ()=>async(dispatch)=>{
         type: "deslogear", //a esto llama
     });
 }
+const actreload = (x)=>async(dispatch)=>{
+    dispatch({
+        type: "reload", //a esto llama
+        payload:x
+    });
+}
 export const action = ()=>{
     return{
         actGetProductos,
         actlogear,
         actdeslogear,
         actregister,
-        actreset
+        actreset,
+        actreload
     }
 }

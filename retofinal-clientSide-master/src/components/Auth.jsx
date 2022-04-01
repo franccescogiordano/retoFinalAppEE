@@ -1,8 +1,9 @@
 import React, { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
+import { action } from "../actions/action";
 import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from "firebase/auth";
 import Inventory from './Inventory';
-import { action } from "../actions/action";
+
 export default () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

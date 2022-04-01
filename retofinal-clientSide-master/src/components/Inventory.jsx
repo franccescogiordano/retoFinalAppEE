@@ -3,50 +3,45 @@ import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPas
 import ProductsList from './ProductsList';
 import { useDispatch,useSelector } from "react-redux";
 import { action } from "../actions/action";
-
+import Vender from '../components/Vender';
 const Inventory = (props) => {
-
-    const [total,setTotalReactPackages]=useState(null);
+    const user=props.user.user;
+  //console.log("props",)
 
     const [cargado,setCargado]=useState("false");
-
+    const [venderx,setVender]=useState("false");
     const { actGetProductos} = action();
 
    const dispatch = useDispatch();
    useEffect(() => {dispatch(actGetProductos());}, []);
    
     const {productos} = useSelector(state => state.reducerproductos);
-    
-   /* useEffect(() => {
-
-        fetch('http://localhost:8080/factura')
-            .then(response => response.json())
-            .then(data => setTotalReactPackages(data));
-           
-  
-    }, []);*/
     const  vender =  () => {
-        setCargado("true");
+        setVender("true");
     }
     
     const reponer =() => {
 
     }
     const verproductos =() => {
-
+        setCargado("true");
     }
-   console.log(props.user.email);
+
     return ( 
     <>
     
-    <div className="menu">
-    <h2>Welcome {props.user.email}</h2>
-        <h1>Que desea hacer</h1>
+    <div className="container">
+    <h2>{user.email}</h2>
+    <br />
+    <h2>Bienvenido campeonnn</h2>
+        <h1>¿Que desea hacer?</h1>
+        <div className=".container-login">
         <button onClick={vender}>Vender</button>
         <button onClick={reponer}>Reponer</button>
         <button onClick={verproductos}>Ver productos</button>
+        </div>
        { cargado==="true" &&<ProductsList total={productos}></ProductsList>}
-
+       { venderx==="true" &&<Vender productos={productos} user={user}></Vender>}
     </div>
     </>);
 }

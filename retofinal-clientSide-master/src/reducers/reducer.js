@@ -3,6 +3,7 @@ const initialState = {
     user: null,
     estadoLogin: "",
     estadoRegistrado:"unregister",
+    reload:false,
 }
 
 export const reducer = (state = initialState, action) => {
@@ -18,7 +19,8 @@ export const reducer = (state = initialState, action) => {
             return { ...state, user: action.payload ,estadoLogin:""}
         case "deslogear":
             return { ...state, user: null, estadoLogin:"" }
-
+        case "reload":
+            return { ...state, reload:action.payload}
         case "estadoLogin":
             return { ...state, estadoLogin: action.payload }
         case "registrar":
