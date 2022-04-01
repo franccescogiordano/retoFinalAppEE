@@ -68,6 +68,13 @@ const actreload = (x)=>async(dispatch)=>{
         payload:x
     });
 }
+
+const actaddcarrito = (productoid,cantidad)=>async(dispatch)=>{
+    dispatch({
+        type: "addcarrito", //a esto llama
+        payload:[productoid,cantidad]
+    });
+}
 export const action = ()=>{
     return{
         actGetProductos,
@@ -75,6 +82,7 @@ export const action = ()=>{
         actdeslogear,
         actregister,
         actreset,
-        actreload
+        actreload,
+        actaddcarrito
     }
 }

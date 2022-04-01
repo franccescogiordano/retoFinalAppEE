@@ -4,22 +4,23 @@ import { action } from "../actions/action";
 const Vender = (props) => {
     let [idproducto, setproductos] = useState("Escoja su producto")
     let [cantidad, setCantidad] = useState(0)
-    const { reload } = useSelector(state => state.reducerproductos);//aca traigo info
+    const { carrito,reload } = useSelector(state => state.reducerproductos);//aca traigo info
     const dispatch = useDispatch();
     const user = props.user.user;
     const productos = props.productos;
     //   console.log(productos) 
-    const [carrito, setCarrito] = useState([]);
-    const { actreload } = action();
+    const { actreload,actaddcarrito } = action();
     //{ ...state, user: action.payload ,estadoLogin:""}
     let handleFruitChange = (e) => {
         setproductos(e.target.value)
     }
     const agregaralcarrito = (e) => {
-        setCarrito([...carrito, {
+   /*     setCarrito([...carrito, {
             ...(productos.find(producto => producto.id == idproducto)),
             cantidad
-        }])
+        }])*/
+       dispatch(actaddcarrito(idproducto,cantidad))
+       
         dispatch(actreload(false));
         console.log(carrito)
         dispatch(actreload(true));
@@ -32,7 +33,7 @@ const Vender = (props) => {
     }
 
     const OnDelete = (id) => {
-        const listUpDelete = carrito;
+      /*  const listUpDelete = carrito;
         const listUpdate = listUpDelete.filter((producto) => {
             console.log("IDS:", producto.id, id)
             return producto.id !== id;
@@ -43,7 +44,7 @@ const Vender = (props) => {
         console.log(carrito)
         console.log(reload)
         dispatch(actreload(true));
-        console.log(reload)
+        console.log(reload)*/
     };
     return (<>
         <h1>Vender Menu:</h1>
