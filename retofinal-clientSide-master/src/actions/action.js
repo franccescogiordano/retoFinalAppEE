@@ -69,10 +69,23 @@ const actreload = (x)=>async(dispatch)=>{
     });
 }
 
-const actaddcarrito = (productoid,cantidad)=>async(dispatch)=>{
+const actaddcarrito = (idproducto,cantidad)=>async(dispatch)=>{
     dispatch({
         type: "addcarrito", //a esto llama
-        payload:[productoid,cantidad]
+        payload:{
+            idproducto:idproducto,
+            cantidad:cantidad
+        }
+    });
+
+
+}
+const actdelcarrito = (idproducto)=>async(dispatch)=>{
+    dispatch({
+        type: "delcarrito", //a esto llama
+        payload:{
+            idproducto:idproducto
+        }
     });
 }
 export const action = ()=>{
@@ -83,6 +96,7 @@ export const action = ()=>{
         actregister,
         actreset,
         actreload,
-        actaddcarrito
+        actaddcarrito,
+        actdelcarrito
     }
 }

@@ -9,27 +9,19 @@ const Vender = (props) => {
     const user = props.user.user;
     const productos = props.productos;
     //   console.log(productos) 
-    const { actreload,actaddcarrito } = action();
+    const { actdelcarrito,actaddcarrito } = action();
     //{ ...state, user: action.payload ,estadoLogin:""}
     let handleFruitChange = (e) => {
         setproductos(e.target.value)
     }
-    const agregaralcarrito = (e) => {
-   /*     setCarrito([...carrito, {
-            ...(productos.find(producto => producto.id == idproducto)),
-            cantidad
-        }])*/
+    const agregaralcarrito = () => {
        dispatch(actaddcarrito(idproducto,cantidad))
-       
-        dispatch(actreload(false));
-        console.log(carrito)
-        dispatch(actreload(true));
+        console.log("CARRITO",carrito)
     }
 
 
     const cargarCantidad = (e) => {
         setCantidad(parseInt(e.target.value))
-
     }
 
     const OnDelete = (id) => {
@@ -45,6 +37,7 @@ const Vender = (props) => {
         console.log(reload)
         dispatch(actreload(true));
         console.log(reload)*/
+        dispatch(actdelcarrito(id))
     };
     return (<>
         <h1>Vender Menu:</h1>
@@ -74,7 +67,7 @@ const Vender = (props) => {
                     <td>19</td>
                     <td>Male</td>
                 </tr>
-                {reload && carrito.map((producto) =>
+                {carrito && carrito.map((producto) =>
                     <tr key={producto.id}>
                         <td>{producto.nombre}</td>
                         <td>{producto.precio}</td>
