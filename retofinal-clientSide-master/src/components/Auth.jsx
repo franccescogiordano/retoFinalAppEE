@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from "firebase/auth";
-import Login from '../containers/Login';
+import Inventory from './Inventory';
 
 export default () => {
   const [email, setEmail] = useState("");
@@ -9,12 +9,15 @@ export default () => {
   const [estadoLogin, setEstadoLogin] = useState("");
   const [estadoRegistrado, setEstadoRegistrado] = useState("unregister");
   const auth = getAuth();
+ const [user, setUser] = useState([]);
   const submit = async () => {
 
     console.log(auth.currentUser);
     await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+      setUser(auth.currentUser);
       setEstado("true");
       setEstadoRegistrado("unregister");
+      setEstadoLogin("");
     })
       .catch((error) => {
         const errorMessage = error.message;
@@ -36,9 +39,9 @@ export default () => {
   const registrar = async () => {
     await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
       // Signed in
-      const user = userCredential.user;
+      setUser(auth.currentUser);
       setEstadoRegistrado("registrado con exito! ahora inicia sesion");
-
+      setEstadoLogin("");
 
     })
       .catch((error) => {
@@ -59,7 +62,7 @@ export default () => {
       <button onClick={submit}>Iniciar sesion</button>
       {estadoRegistrado === "unregister" && <button onClick={registrar}>Registrarme</button>}
     </div>}
-    {estado === "true" && <><Login></Login><button onClick={logout}>Cerrar sesion</button></>}
+    {estado === "true" && <><Inventory user={user}></Inventory><button onClick={logout}>Cerrar sesion</button></>}
   </div>);
 }
 

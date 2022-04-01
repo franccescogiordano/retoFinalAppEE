@@ -7,6 +7,7 @@ function App() {
     <div className="div-welcome">
       <img src={Logo} alt="" />
       <h1>Reto final - Client Side</h1>
+      
       <Auth></Auth>
     </div>
   );
