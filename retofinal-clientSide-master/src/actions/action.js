@@ -1,4 +1,5 @@
 import { service } from '../services/service';
+import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from "firebase/auth";
 const { getVendedores, getProductos, getFacturas, getProveedores, getVideos, getVolantes ,getClientes} = service();
 
 const actGetProductos = ()=>async(dispatch)=>{
@@ -23,9 +24,35 @@ const actGetProductos = ()=>async(dispatch)=>{
         console.log(e)
     }
 }
+const actlogear = (auth,email,password)=>async(dispatch)=>{
+    
+    try{
+    const user= await signInWithEmailAndPassword(auth, email, password);
+      
+   
+    
+    dispatch({
+            type: "logear", //a esto llama
+            payload:user //esto carga
+        });
+    }catch(e){
+            const errorMessage = e.message;
+            dispatch({
+                type: "estadoLogin", //a esto llama
+                payload:errorMessage //esto carga
+            });
+    }
+}
 
+const actdeslogear = ()=>async(dispatch)=>{
+    dispatch({
+        type: "deslogear", //a esto llama
+    });
+}
 export const action = ()=>{
     return{
         actGetProductos,
+        actlogear,
+        actdeslogear
     }
 }

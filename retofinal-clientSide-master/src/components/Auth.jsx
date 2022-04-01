@@ -1,35 +1,30 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { useDispatch,useSelector } from "react-redux";
 import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from "firebase/auth";
 import Inventory from './Inventory';
-
+import { action } from "../actions/action";
 export default () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [estado, setEstado] = useState("false");
-  const [estadoLogin, setEstadoLogin] = useState("");
+  const {estadoLogin,user} = useSelector(state => state.reducerproductos);//aca traigo info
   const [estadoRegistrado, setEstadoRegistrado] = useState("unregister");
   const auth = getAuth();
- const [user, setUser] = useState([]);
+ 
+  const dispatch=useDispatch();
+  
+  const { actlogear,actdeslogear} = action();
+
+  
+ 
+ // const [user, setUser] = useState([]);
   const submit = async () => {
 
-    console.log(auth.currentUser);
-    await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      setUser(auth.currentUser);
-      setEstado("true");
-      setEstadoRegistrado("unregister");
-      setEstadoLogin("");
-    })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setEstado("false");
-        setEstadoLogin(errorMessage);
-
-      });
+      dispatch(actlogear(auth,email,password));
     // createUserWithEmailAndPassword(auth,email,password);
   }
   const logout = async () => {
     signOut(auth).then(() => {
-      setEstado("false");
+      dispatch(actdeslogear());
     }).catch((error) => {
       console.error(error);
     });
@@ -38,23 +33,18 @@ export default () => {
 
   const registrar = async () => {
     await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      // Signed in
-      setUser(auth.currentUser);
       setEstadoRegistrado("registrado con exito! ahora inicia sesion");
-      setEstadoLogin("");
-
     })
       .catch((error) => {
         const errorMessage = error.message;
-        setEstado("false");
-        setEstadoLogin(errorMessage);
+        //setEstadoLogin(errorMessage);
 
       });
   }
   return (<div>
-    {estadoLogin !== "" && <h4>{estadoLogin}</h4>}
+    {<h4>{estadoLogin}</h4>}
     {estadoRegistrado === "registrado con exito! ahora inicia sesion" && <h4>{estadoRegistrado}</h4>}
-    {estado === "false" && <div className="container">
+    {!user && <div className="container">
       <label htmlFor="email">Correo electronico</label>
       <input type="email" id="email" onChange={(ev) => setEmail(ev.target.value)} ></input>
       <label htmlFor="password"> Contraseña</label>
@@ -62,7 +52,7 @@ export default () => {
       <button onClick={submit}>Iniciar sesion</button>
       {estadoRegistrado === "unregister" && <button onClick={registrar}>Registrarme</button>}
     </div>}
-    {estado === "true" && <><Inventory user={user}></Inventory><button onClick={logout}>Cerrar sesion</button></>}
+    {user && <><Inventory user={user}></Inventory><button onClick={logout}>Cerrar sesion</button></>}
   </div>);
 }
 

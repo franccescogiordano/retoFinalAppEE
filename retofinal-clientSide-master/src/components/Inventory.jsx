@@ -1,5 +1,5 @@
 import React ,{ useState ,useEffect} from "react";
-import { createStore, applyMiddleware } from 'redux';
+import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from "firebase/auth";
 import ProductsList from './ProductsList';
 import { useDispatch,useSelector } from "react-redux";
 import { action } from "../actions/action";
@@ -13,9 +13,9 @@ const Inventory = (props) => {
     const { actGetProductos} = action();
 
    const dispatch = useDispatch();
-
-   dispatch(actGetProductos());
-    const productos = useSelector(state => state.reducerproductos);
+   useEffect(() => {dispatch(actGetProductos());}, []);
+   
+    const {productos} = useSelector(state => state.reducerproductos);
     
    /* useEffect(() => {
 
@@ -45,7 +45,7 @@ const Inventory = (props) => {
         <button onClick={vender}>Vender</button>
         <button onClick={reponer}>Reponer</button>
         <button onClick={verproductos}>Ver productos</button>
-       { cargado==="true" &&<ProductsList total={total}></ProductsList>}
+       { cargado==="true" &&<ProductsList total={productos}></ProductsList>}
 
     </div>
     </>);
