@@ -1,7 +1,8 @@
 const initialState = {
     productos: [],
     user: null,
-    estadoLogin: ""
+    estadoLogin: "",
+    estadoRegistrado:"unregister",
 }
 
 export const reducer = (state = initialState, action) => {
@@ -17,8 +18,13 @@ export const reducer = (state = initialState, action) => {
             return { ...state, user: action.payload ,estadoLogin:""}
         case "deslogear":
             return { ...state, user: null, estadoLogin:"" }
+
         case "estadoLogin":
             return { ...state, estadoLogin: action.payload }
+        case "registrar":
+            return { ...state, estadoRegistrado: action.payload }
+        case "reset":
+            return { ...state, estadoLogin: "" , estadoRegistrado:"unregister"}
         default:
             return state;
     }

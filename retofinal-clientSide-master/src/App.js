@@ -1,14 +1,13 @@
 
 import Logo from './assets/img/logo.png'
-import Auth from './components/Auth';
+import { Link } from "react-router-dom";
 import React, { Component }  from 'react';
 function App() {
   return (
     <div className="div-welcome">
       <img src={Logo} alt="" />
       <h1>Reto final - Client Side</h1>
-      
-      <Auth></Auth>
+      <Link to='/auth'>Inicar Sesion / Registrarte</Link>
     </div>
   );
 }

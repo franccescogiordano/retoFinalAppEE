@@ -6,14 +6,16 @@ import { action } from "../actions/action";
 export default () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {estadoLogin,user} = useSelector(state => state.reducerproductos);//aca traigo info
-  const [estadoRegistrado, setEstadoRegistrado] = useState("unregister");
+  const {estadoLogin,user,estadoRegistrado} = useSelector(state => state.reducerproductos);//aca traigo info
+  //const [estadoRegistrado, setEstadoRegistrado] = useState("unregister");
   const auth = getAuth();
- 
+
   const dispatch=useDispatch();
   
-  const { actlogear,actdeslogear} = action();
+  const { actlogear,actdeslogear,actregister,actreset} = action();
 
+  useEffect(() => {dispatch(actreset());}, []);
+ 
   
  
  // const [user, setUser] = useState([]);
@@ -32,15 +34,11 @@ export default () => {
   }
 
   const registrar = async () => {
-    await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      setEstadoRegistrado("registrado con exito! ahora inicia sesion");
-    })
-      .catch((error) => {
-        const errorMessage = error.message;
-        //setEstadoLogin(errorMessage);
-
-      });
-  }
+   
+    dispatch(actregister(auth,email,password));
+    //setEstadoRegistrado("registrado con exito! ahora inicia sesion");
+    }
+  
   return (<div>
     {<h4>{estadoLogin}</h4>}
     {estadoRegistrado === "registrado con exito! ahora inicia sesion" && <h4>{estadoRegistrado}</h4>}

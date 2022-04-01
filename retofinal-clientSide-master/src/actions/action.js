@@ -12,14 +12,6 @@ const actGetProductos = ()=>async(dispatch)=>{
                 type: "getProductos", //a esto llama
                 payload:data //esto carga
             }));
-           
-        /*    let url = `http://localhost:8080/factura`;
-            const response = await fetch(url);
-            const data = await response.json();
-        dispatch({
-            type: "getProductos", //a esto llama
-            payload:data //esto carga
-        });*/
     } catch (e) {
         console.log(e)
     }
@@ -29,8 +21,6 @@ const actlogear = (auth,email,password)=>async(dispatch)=>{
     try{
     const user= await signInWithEmailAndPassword(auth, email, password);
       
-   
-    
     dispatch({
             type: "logear", //a esto llama
             payload:user //esto carga
@@ -43,6 +33,28 @@ const actlogear = (auth,email,password)=>async(dispatch)=>{
             });
     }
 }
+const actregister = (auth,email,password)=>async(dispatch)=>{
+    
+    try{
+    const user= await createUserWithEmailAndPassword(auth, email, password);
+      console.log(user);
+    dispatch({
+            type: "registrar", //a esto llama
+            payload:"registrado con exito! ahora inicia sesion" //esto carga
+        });
+    }catch(e){
+            const errorMessage = e.message;
+            dispatch({
+                type: "estadoLogin", //a esto llama
+                payload:errorMessage //esto carga
+            });
+    }
+}
+const actreset = ()=>async(dispatch)=>{
+    dispatch({
+        type: "reset", //a esto llama
+    });
+}
 
 const actdeslogear = ()=>async(dispatch)=>{
     dispatch({
@@ -53,6 +65,8 @@ export const action = ()=>{
     return{
         actGetProductos,
         actlogear,
-        actdeslogear
+        actdeslogear,
+        actregister,
+        actreset
     }
 }
