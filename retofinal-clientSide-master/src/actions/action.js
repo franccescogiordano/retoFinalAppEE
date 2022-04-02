@@ -28,6 +28,18 @@ const actGetFacturas = ()=>async(dispatch)=>{
         console.log(e)
     }
 }
+const actGetVolantes = ()=>async(dispatch)=>{
+    try {
+        fetch('http://localhost:8080/volante')
+            .then(response => response.json())
+            .then(data => dispatch({
+                type: "getVolantes", //a esto llama
+                payload:data //esto carga
+            }));
+    } catch (e) {
+        console.log(e)
+    }
+}
 const actlogear = (auth,email,password)=>async(dispatch)=>{
     
     try{
@@ -99,6 +111,25 @@ const actdelcarrito = (idproducto)=>async(dispatch)=>{
         }
     });
 }
+const actaddcarrito2 = (idproducto,cantidad)=>async(dispatch)=>{
+    dispatch({
+        type: "addcarrito2", //a esto llama
+        payload:{
+            idproducto:idproducto,
+            cantidad:cantidad
+        }
+    });
+
+
+}
+const actdelcarrito2 = (idproducto)=>async(dispatch)=>{
+    dispatch({
+        type: "delcarrito2", //a esto llama
+        payload:{
+            idproducto:idproducto
+        }
+    });
+}
 const actcargarproducto = (nombreX,descripcionX,stockActualX,stockMinimoX,stockMaximoX,precioX,tipoX)=>async(dispatch)=>{
     try {
         const request = {
@@ -126,7 +157,7 @@ const actcargarproducto = (nombreX,descripcionX,stockActualX,stockMinimoX,stockM
         console.log(error.message);
     }
 }
-   
+
 const actfactura = (fechafactura,quienatendio,productoscomprados,totalapagar)=>async(dispatch)=>{
     try {
         const request = {

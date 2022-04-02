@@ -11,12 +11,23 @@ public class VolanteModel {
     private String fecha;
     private List<ProductoModel> productosAIngresar;
     private String CIProveedor;
+    private String nombreprov;
 
-
-    public VolanteModel( String fecha, List<ProductoModel> productosAIngresar, String CIProveedor) {
+    public VolanteModel( String fecha, List<ProductoModel> productosAIngresar, String CIProveedor,String nombreprov) {
         this.fecha = fecha;
         this.productosAIngresar = productosAIngresar;
         this.CIProveedor = CIProveedor;
+        this.nombreprov=nombreprov;
+    }
+
+
+    public String getNombreprov() {
+        return nombreprov;
+    }
+
+
+    public void setNombreprov(String nombreprov) {
+        this.nombreprov = nombreprov;
     }
 
 

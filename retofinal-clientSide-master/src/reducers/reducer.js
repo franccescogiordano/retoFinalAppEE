@@ -6,6 +6,8 @@ const initialState = {
     reload: false,
     carrito: [],
     facturas:[],
+    volantes:[],
+    carritoreponer: [],
 }
 
 export const reducer = (state = initialState, action) => {
@@ -20,7 +22,13 @@ export const reducer = (state = initialState, action) => {
                 return {
                     ...state,
                     facturas: action.payload
-                }    
+                }  
+                
+                case   "getVolantes":
+                    return {
+                        ...state,
+                        volantes: action.payload
+                    }  
         case "logear":
             return { ...state, user: action.payload, estadoLogin: "" }
         case "deslogear":
@@ -47,6 +55,20 @@ export const reducer = (state = initialState, action) => {
                 return producto.id !== action.payload.idproducto;
              });
              return { ...state, carrito: listUpdate }
+        case "addcarrito2":
+            const cantidad1 = action.payload.cantidad;
+            const productoadd1 = ([...state.carritoreponer, {
+                ...(state.productos.find(producto => producto.id === action.payload.idproducto)),
+                cantidad1
+            }]);
+            return { ...state, carrito: productoadd1 }
+
+        case "delcarrito2":
+            const listUpDelete2 = state.carritoreponer;
+            const listUpdate2 = listUpDelete2.filter((producto) => {
+                return producto.id !== action.payload.idproducto;
+             });
+             return { ...state, carrito: listUpdate2 }
         case "cargarproducto":
             //    console.log("payload carrito", action.payload)
                 const productosactuales = ([...state.productos, action.payload]);
