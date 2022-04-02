@@ -14,17 +14,30 @@ public class FacturaModel {
     private String fechaFactura;
     public static final String CONSECUTIVODEFACTURAS = "";
 
-    private VendedorModel quienAtendio;
+    private String quienAtendio;
     private List<ProductoModel> productosComprados;
     private Float totalAPagar;
 
-    public FacturaModel(String fechaFactura, VendedorModel quienAtendio, List<ProductoModel> productosComprados,
-            Float totalAPagar) {
+    public FacturaModel(String fechaFactura, String quienAtendio, List<ProductoModel> productosComprados, Float totalAPagar) {
         this.fechaFactura = fechaFactura;
-        this.quienAtendio = quienAtendio;
+        this.quienAtendio=quienAtendio;
         this.productosComprados = productosComprados;
         this.totalAPagar = totalAPagar;
     }
+    
+    
+
+    public String getQuienAtendio() {
+        return quienAtendio;
+    }
+
+
+
+    public void setQuienAtendio(String quienAtendio) {
+        this.quienAtendio = quienAtendio;
+    }
+
+
 
     public String getId() {
         return this.id;
@@ -42,13 +55,7 @@ public class FacturaModel {
         this.fechaFactura = fechaFactura;
     }
 
-    public VendedorModel getQuienAtendio() {
-        return this.quienAtendio;
-    }
-
-    public void setQuienAtendio(VendedorModel quienAtendio) {
-        this.quienAtendio = quienAtendio;
-    }
+  
 
     public List<ProductoModel> getProductosComprados() {
         return this.productosComprados;

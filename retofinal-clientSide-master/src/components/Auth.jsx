@@ -53,7 +53,7 @@ export default () => {
       {estadoRegistrado === "unregister" && <button onClick={registrar}>Registrarme</button>}</div>
     </div>}
     
-    {user && <><Inventory user={user}></Inventory><button onClick={logout}>Cerrar sesion</button></>}
+    {user && <><Inventory user={user}></Inventory><button className="cerrarsesionboton" onClick={logout} >Cerrar sesion</button></>}
   </div>);
 }
 
