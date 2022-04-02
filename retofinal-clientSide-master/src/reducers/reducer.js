@@ -56,10 +56,8 @@ export const reducer = (state = initialState, action) => {
              });
              return { ...state, carrito: listUpdate }
         case "addcarrito2":
-            const cantidad1 = action.payload.cantidad;
             const productoadd1 = ([...state.carritoreponer, {
-                ...(state.productos.find(producto => producto.id === action.payload.idproducto)),
-                cantidad1
+                ...(state.productos.find(producto => producto.id === action.payload.idproducto))
             }]);
             return { ...state, carrito: productoadd1 }
 

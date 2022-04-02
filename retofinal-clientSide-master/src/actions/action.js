@@ -111,12 +111,11 @@ const actdelcarrito = (idproducto)=>async(dispatch)=>{
         }
     });
 }
-const actaddcarrito2 = (idproducto,cantidad)=>async(dispatch)=>{
+const actaddcarrito2 = (idproducto)=>async(dispatch)=>{
     dispatch({
         type: "addcarrito2", //a esto llama
         payload:{
-            idproducto:idproducto,
-            cantidad:cantidad
+            idproducto:idproducto
         }
     });
 
@@ -157,8 +156,53 @@ const actcargarproducto = (nombreX,descripcionX,stockActualX,stockMinimoX,stockM
         console.log(error.message);
     }
 }
-
+/*const actcargarproducto2 = (nombreX,descripcionX,stockActualX,stockMinimoX,stockMaximoX,precioX,tipoX)=>async(dispatch)=>{
+    try {
+        const request = {
+            nombre: nombreX,
+            precio: precioX,
+            descripcion: descripcionX,
+            stockActual: stockActualX,
+            tipo: tipoX,
+            stockMinimo: stockMinimoX,
+            stockMaximo: stockMaximoX
+        }
+        
+        dispatch({
+            type: "cargarproducto2", //a esto llama
+            payload:{
+                idproducto:idproducto
+            }
+        });
+    } catch(error) {
+        console.log(error.message);
+    }
+}*/
 const actfactura = (fechafactura,quienatendio,productoscomprados,totalapagar)=>async(dispatch)=>{
+    try {
+        const request = {
+        fechaFactura:fechafactura,
+        quienAtendio:quienatendio,
+        productosComprados:productoscomprados,
+        totalAPagar:totalapagar
+        }
+        console.log(request)
+        console.log(JSON.stringify(request))
+        fetch("http://localhost:8080/factura", {
+            method: "POST",
+            body: JSON.stringify(request),
+            headers: { "Content-Type": "application/json" }
+        })
+            .then(response => response.json())
+            .then(data => dispatch({
+                type: "cargarfactura",
+                payload: data
+            }));
+    } catch(error) {
+        console.log(error.message);
+    }
+}
+const actvolante = (fechafactura,quienatendio,productoscomprados,totalapagar)=>async(dispatch)=>{
     try {
         const request = {
         fechaFactura:fechafactura,
@@ -194,6 +238,10 @@ export const action = ()=>{
         actdelcarrito,
         actcargarproducto,
         actGetFacturas,
-        actfactura
+        actfactura,
+        actvolante,
+        actdelcarrito2,
+        actaddcarrito2,
+        actGetVolantes
     }
 }
