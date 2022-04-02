@@ -2,6 +2,5 @@
 
 Usa este repositorio como base para el desarrollo del reto
 
-## Ten en cuenta que toda copia o fraude tiene penalidad
-
+Video link: parte 1: https://youtu.be/xiIM9OEk9OQ
 
